@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Webpage with File Downloads</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+  }
+  main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+  }
+  .row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+  }
+  .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .box-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .box {
+    width: 150px;
+    height: 150px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  .red-group {
+    background-color: #ffcccc;
+  }
+  .blue-group {
+    background-color: #cce5ff;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Simple Webpage with File Downloads</h1>
+  </header>
+  <main>
+    <div class="row red-group">
+      <h2 class="title">Red Group</h2>
+      <div class="box-group">
+        <div class="box" onclick="window.location.href = 'sample1.pdf';">
+          <h3>Download PDF 1</h3>
+        </div>
+        <div class="box" onclick="window.location.href = 'sample2.pdf';">
+          <h3>Download PDF 2</h3>
+        </div>
+        <div class="box" onclick="window.location.href = 'sample3.pdf';">
+          <h3>Download PDF 3</h3>
+        </div>
+        <div class="box" onclick="window.location.href = 'sample4.pdf';">
+          <h3>Download PDF 4</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row blue-group">
+      <h2 class="title">Blue Group</h2>
+      <div class="box-group">
+        <div class="box" onclick="window.location.href = 'sample1.jpg';">
+          <h3>Download Image 1</h3>
+        </div>
+        <div class="box" onclick="window.location.href = 'sample2.jpg';">
+          <h3>Download Image 2</h3>
+        </div>
+        <div class="box" onclick="window.location.href = 'sample3.jpg';">
+          <h3>Download Image 3</h3>
+        </div>
+        <div class="box" onclick="window.location.href = 'sample4.jpg';">
+          <h3>Download Image 4</h3>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
