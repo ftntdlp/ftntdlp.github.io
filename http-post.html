@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DLP Test - HTTP POST</title>
+    <style>
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test your DLP Configuration</h1>
+        <form id="postForm" onsubmit="sendData(event)">
+            <label for="text">Enter text (max 200 characters):</label><br>
+            <textarea id="text" name="text" rows="4" cols="50" maxlength="200"></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function sendData(event) {
+            event.preventDefault();
+            var text = document.getElementById("text").value;
+            document.getElementById("text").value = "";
+
+            // Simulate server response
+            var success = Math.random() < 0.5; // 50% chance of success
+            if (success) {
+                document.getElementById("message").innerText = "Submitted Text was accepted";
+                document.getElementById("message").className = "";
+            } else {
+                document.getElementById("message").innerText = "Submitted Text did not come through (blocked by DLP)";
+                document.getElementById("message").className = "error";
+            }
+        }
+    </script>
+</body>
+</html>
