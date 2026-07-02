@@ -145,6 +145,26 @@
       font-size: 18px;
       line-height: 1;
     }
+    .copy-hint {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+    }
+    .copy-hint svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .copy-hint.done { color: #1a7f37; }
     footer {
       max-width: 680px;
       margin: 0 auto;
@@ -201,11 +221,14 @@
         <span class="file-desc">A simple .txt file listing sample SSN values.</span>
       </button>
 
-      <button class="file" onclick="window.open('https://github.com/ftntdlp/dlp-test-files/blob/main/dlp_test_sample.py?raw=true', '_blank');">
+      <button class="file" data-copy-url="https://raw.githubusercontent.com/ftntdlp/dlp-test-files/main/dlp_test_sample.py" onclick="copySource(this);">
         <span class="tag" aria-label="Python source file"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
         <span class="file-title">Source Code</span>
-        <span class="chevron">&rsaquo;</span>
-        <span class="file-desc">A Python source file containing sensitive data for code-aware DLP scanning.</span>
+        <span class="copy-hint">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <span class="copy-label">Copy</span>
+        </span>
+        <span class="file-desc">Copies to your clipboard. Paste it into GPT prompts to test the DLP capability.</span>
       </button>
     </div>
   </main>
@@ -214,5 +237,28 @@
     All files contain synthetic test data only &mdash; not real personal information.<br>
     DLP Test Lab &middot; for security validation purposes.
   </footer>
+
+  <script>
+    async function copySource(btn) {
+      const hint = btn.querySelector('.copy-hint');
+      const label = btn.querySelector('.copy-label');
+      const setLabel = (text, done) => {
+        label.textContent = text;
+        hint.classList.toggle('done', !!done);
+      };
+      setLabel('Copying…', false);
+      try {
+        const res = await fetch(btn.dataset.copyUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const code = await res.text();
+        await navigator.clipboard.writeText(code);
+        setLabel('Copied!', true);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        setLabel('Copy failed', false);
+      }
+      setTimeout(() => setLabel('Copy', false), 2000);
+    }
+  </script>
 </body>
 </html>

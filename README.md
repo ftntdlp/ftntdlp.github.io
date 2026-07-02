@@ -14,9 +14,11 @@ The current set of files contain **Credit Card numbers and/or US Social Security
 | PDF | `ssn-cc.pdf` | PDF document with credit card and SSN data in its text. |
 | ZIP | `ssn-cc.zip` | Compressed archive — tests detection inside packed files. |
 | TXT | `ssn.txt`  | Plain text file listing sample SSN values. |
-| PY  | `dlp_test_sample.py` | Python source file with sensitive data for code-aware DLP scanning. |
+| PY  | `dlp_test_sample.py` | Python source file with sensitive data — **copies to clipboard** (no download) to test clipboard-based DLP. |
 
-Each row opens the raw file in a **new tab** (`window.open(..., '_blank')`). This is intentional: opening in a separate tab lets a DLP block/warning page render on its own without replacing this test site.
+The first four rows open the raw file in a **new tab** (`window.open(..., '_blank')`). This is intentional: opening in a separate tab lets a DLP block/warning page render on its own without replacing this test site.
+
+The **PY (Source Code)** row is different — instead of downloading, it `fetch()`es the raw file text from `raw.githubusercontent.com` and writes it to the clipboard via the Clipboard API, then shows a "Copied!" confirmation. This tests clipboard/endpoint DLP rather than file-transfer DLP. It requires a secure context (HTTPS or `localhost`), which GitHub Pages provides.
 
 ## Usage
 
